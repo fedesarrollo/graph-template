@@ -1,6 +1,6 @@
 # graph-template
 
-Formato estándar de gráficas para **Python**, **R** y **Stata**, con la misma paleta de colores en los tres lenguajes. El objetivo es que una gráfica se vea igual sin importar en qué programa se hizo.
+Formato estándar de gráficas para **Python**, **R** y **Stata**, con la misma paleta de colores y la fuente **Inter** en los tres lenguajes. El objetivo es que una gráfica se vea igual sin importar en qué programa se hizo.
 
 ![Paleta](ejemplos/salida/paleta.png)
 
@@ -25,12 +25,14 @@ graph-template/
 ├── paleta.json              # Fuente única de los colores (referencia)
 ├── paleta.jpeg              # Imagen original de la paleta
 ├── pyproject.toml           # Hace instalable el paquete de Python
-├── python/
-│   └── estilo_graficas.py   # Estilo para matplotlib / pandas / seaborn
+├── python/estilo_graficas/  # Paquete de Python (matplotlib / pandas / seaborn)
+│   ├── __init__.py
+│   └── fuentes/             # Inter incluida
 ├── R/                       # Paquete de R "estilograficas"
 │   ├── DESCRIPTION
 │   ├── NAMESPACE
-│   └── R/estilo_graficas.R  # Tema y escalas para ggplot2
+│   ├── R/estilo_graficas.R  # Tema y escalas para ggplot2
+│   └── inst/fuentes/        # Inter incluida
 ├── stata/                   # Paquete de Stata "paleta" (net install)
 │   ├── stata.toc, paleta.pkg
 │   ├── scheme-paleta.scheme # Scheme de Stata
@@ -63,9 +65,19 @@ A partir de estas familias se definen tres paletas de uso:
 
 Además se fijan colores neutros que no están en la paleta original pero son necesarios para que el texto se lea bien: texto `#333333`, texto secundario `#666666`, ejes `#A8A8A8` y cuadrícula `#E0E0E0`.
 
+## La fuente: Inter
+
+Todas las gráficas usan [Inter](https://rsms.me/inter/) (licencia SIL Open Font License, que permite redistribuirla).
+
+- **Python y R:** Inter viene **incluida en el paquete**. No hay que instalar nada más y las gráficas salen iguales en cualquier computador, en PNG y en PDF.
+- **Stata:** Stata solo usa fuentes instaladas en el sistema, así que hay que **instalar Inter en el computador una vez**:
+  - macOS: descargue el ZIP de [rsms.me/inter](https://rsms.me/inter/download/), abra la carpeta `extras/ttf` y haga doble clic en `Inter-Regular.ttf` y `Inter-Bold.ttf` → *Instalar*. También sirve `brew install --cask font-inter`.
+  - Windows: el mismo ZIP; clic derecho sobre los `.ttf` → *Instalar para todos los usuarios*.
+  - Después de instalarla, reinicie Stata.
+
 ### Reglas del formato
 
-1. Fondo blanco, sin recuadro alrededor de la gráfica.
+1. Fuente Inter. Fondo blanco, sin recuadro alrededor de la gráfica.
 2. Solo líneas de cuadrícula horizontales y suaves; sin eje vertical.
 3. Título en negrita, alineado a la izquierda. La leyenda va arriba, sin título.
 4. La fuente de los datos va en una nota abajo a la izquierda.
@@ -94,7 +106,7 @@ import estilo_graficas as eg
 eg.aplicar_estilo()   # todas las gráficas que se creen después usan el estilo
 ```
 
-`aplicar_estilo()` acepta `tamano_fuente=11` y `fuente="Nombre de fuente"` (opcional, la fuente debe estar instalada).
+`aplicar_estilo()` usa Inter, que viene incluida en el paquete. Acepta `tamano_fuente=11` y `fuente="Inter"` (puede poner otra fuente instalada, o `None` para la de matplotlib). Los PDF guardan el texto como texto editable.
 
 ### 2. Gráfica de líneas (colores automáticos)
 
@@ -146,10 +158,10 @@ Para escalas divergentes, use límites simétricos (`vmin=-x, vmax=x`) para que 
 
 ### 1. Instalar, cargar y aplicar el estilo
 
-Instale una vez. También se recomienda `ragg`: en macOS el PNG por defecto altera ligeramente los colores, y `guardar_grafica()` usa `ragg` automáticamente si está instalado.
+Instale una vez (esto instala también `ragg` y `showtext`, que el paquete usa para respetar los colores exactos y la fuente Inter al exportar):
 
 ```r
-install.packages(c("remotes", "ragg"))
+install.packages("remotes")
 remotes::install_github("fedesarrollo/graph-template", subdir = "R")
 ```
 
@@ -160,7 +172,7 @@ library(estilograficas)   # también carga ggplot2
 aplicar_estilo()          # tema y colores por defecto para toda la sesión
 ```
 
-`aplicar_estilo()` fija `theme_paleta()` como tema y la paleta categórica como colores por defecto. Si prefiere no cambiar la sesión, agregue el tema y las escalas a cada gráfica:
+`aplicar_estilo()` fija `theme_paleta()` como tema, Inter como fuente y la paleta categórica como colores por defecto. Si prefiere no cambiar la sesión, agregue el tema y las escalas a cada gráfica:
 
 ```r
 ggplot(datos, aes(anio, valor, color = grupo)) +
@@ -180,6 +192,8 @@ g <- ggplot(datos, aes(anio, valor, color = grupo)) +
 
 guardar_grafica(g, "mi_grafica", carpeta = "salida")   # PNG y PDF, 8 x 4.5 pulgadas
 ```
+
+Use `guardar_grafica()` en lugar de `ggsave()` directamente: es la que garantiza que la fuente y los colores salgan bien. En el panel de gráficas de RStudio la fuente puede verse distinta; el archivo guardado es el que vale. Si escribe texto con `annotate()` o necesita la fuente en otro lugar, use `family = paleta_fuente`.
 
 `guardar_grafica()` acepta `formatos`, `ancho`, `alto` (en pulgadas) y `dpi`.
 
@@ -232,11 +246,13 @@ paleta_colores
 
 Si quiere que el scheme quede fijo y no tener que escribir `set scheme` cada vez, corra una sola vez `set scheme paleta, permanently`.
 
+`paleta_colores` además fija Inter como fuente de las gráficas (requiere Inter instalada, ver [La fuente: Inter](#la-fuente-inter)). Este ajuste queda guardado en Stata, no hay que repetirlo en cada sesión, aunque no hace daño hacerlo.
+
 Con el scheme activo, todas las gráficas usan el fondo blanco, la cuadrícula horizontal y los colores de la paleta categórica en orden (`p1` = turquesa, `p2` = coral, `p3` = ámbar, ...).
 
 ### 2. Usar los colores por nombre
 
-El comando `paleta_colores` crea globales con cada color en formato RGB:
+El comando `paleta_colores` también crea globales con cada color en formato RGB:
 
 ```stata
 paleta_colores
@@ -287,6 +303,6 @@ do ejemplos/ejemplo_stata.do
 
 ## Cambiar o agregar colores
 
-`paleta.json` es la referencia. Si un color cambia, actualícelo en `paleta.json`, `python/estilo_graficas.py`, `R/R/estilo_graficas.R`, `stata/scheme-paleta.scheme` y `stata/paleta_colores.ado` (en Stata los colores van en RGB, por ejemplo `#DA5E46` → `"218 94 70"`).
+`paleta.json` es la referencia. Si un color cambia, actualícelo en `paleta.json`, `python/estilo_graficas/__init__.py`, `R/R/estilo_graficas.R`, `stata/scheme-paleta.scheme` y `stata/paleta_colores.ado` (en Stata los colores van en RGB, por ejemplo `#DA5E46` → `"218 94 70"`).
 
 Luego suba la versión en `pyproject.toml` y `R/DESCRIPTION`, cambie `Distribution-Date` en `stata/paleta.pkg`, y pida a los usuarios que vuelvan a correr el comando de instalación.

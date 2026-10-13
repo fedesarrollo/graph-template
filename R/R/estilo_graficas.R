@@ -5,7 +5,28 @@
 #   aplicar_estilo()
 #   ggplot(datos, aes(x, y, color = grupo)) + geom_line()
 #
-# Los colores son los mismos de paleta.json, python/estilo_graficas.py y stata/.
+# Los colores y la fuente (Inter) son los mismos de python/ y stata/.
+
+# -----------------------------------------------------------------------------
+# Fuente: Inter viene incluida en el paquete (licencia SIL OFL, ver inst/fuentes/OFL.txt)
+# -----------------------------------------------------------------------------
+# Se registra con un nombre propio para no depender de la versión de Inter que
+# haya (o no) en el computador: así las gráficas se ven igual en todos lados.
+paleta_fuente <- "Inter Paleta"
+
+.onLoad <- function(libname, pkgname) {
+  carpeta <- system.file("fuentes", package = pkgname)
+  archivos <- file.path(carpeta, c("Inter-Regular.ttf", "Inter-Bold.ttf",
+                                   "Inter-Italic.ttf", "Inter-BoldItalic.ttf"))
+  # Para PNG (ragg)
+  if (!paleta_fuente %in% systemfonts::registry_fonts()$family) {
+    systemfonts::register_font(paleta_fuente, plain = archivos[1], bold = archivos[2],
+                               italic = archivos[3], bolditalic = archivos[4])
+  }
+  # Para PDF (showtext)
+  sysfonts::font_add(paleta_fuente, regular = archivos[1], bold = archivos[2],
+                     italic = archivos[3], bolditalic = archivos[4])
+}
 
 # -----------------------------------------------------------------------------
 # Paleta (tono 1 = más claro, tono 5 = más intenso)
@@ -62,8 +83,8 @@ paleta_div <- function(n) {
 # -----------------------------------------------------------------------------
 # Tema
 # -----------------------------------------------------------------------------
-theme_paleta <- function(base_size = 11, base_family = "") {
-  theme_minimal(base_size = base_size, base_family = base_family) %+replace%
+theme_paleta <- function(base_size = 11, base_family = paleta_fuente) {
+  theme_minimal(base_size = base_size, base_family = base_family) +
     theme(
       text             = element_text(color = paleta_texto),
       plot.title       = element_text(face = "bold", size = rel(1.25), hjust = 0,
@@ -90,8 +111,7 @@ theme_paleta <- function(base_size = 11, base_family = "") {
       plot.background  = element_rect(fill = paleta_fondo, color = NA),
       panel.background = element_rect(fill = paleta_fondo, color = NA),
       strip.text       = element_text(face = "bold", hjust = 0),
-      plot.margin      = margin(12, 12, 12, 12),
-      complete = TRUE
+      plot.margin      = margin(12, 12, 12, 12)
     )
 }
 
@@ -127,7 +147,7 @@ scale_fill_paleta_div <- function(centro = 0, ...) {
 
 # Fija el tema y los colores por defecto para toda la sesión, de modo que
 # no haga falta agregar theme_paleta() ni scale_*_paleta() a cada gráfica.
-aplicar_estilo <- function(base_size = 11, base_family = "") {
+aplicar_estilo <- function(base_size = 11, base_family = paleta_fuente) {
   theme_set(theme_paleta(base_size, base_family))
   options(
     ggplot2.discrete.colour   = paleta_categorica,
@@ -137,6 +157,8 @@ aplicar_estilo <- function(base_size = 11, base_family = "") {
   )
   update_geom_defaults("line",  list(colour = paleta_categorica[1], linewidth = 0.9))
   update_geom_defaults("point", list(colour = paleta_categorica[1]))
+  update_geom_defaults("text",  list(family = base_family, colour = paleta_texto))
+  update_geom_defaults("label", list(family = base_family, colour = paleta_texto))
   update_geom_defaults("col",   list(fill = paleta_categorica[1]))
   update_geom_defaults("bar",   list(fill = paleta_categorica[1]))
   invisible(NULL)
@@ -149,14 +171,18 @@ guardar_grafica <- function(grafica, nombre, carpeta = ".", formatos = c("png", 
   rutas <- file.path(carpeta, paste0(nombre, ".", formatos))
   for (ruta in rutas) {
     dispositivo <- NULL
-    # El png por defecto de macOS (quartz) altera los colores; ragg los respeta
+    # PNG con ragg: respeta los colores exactos y usa la Inter incluida
     if (grepl("\\.png$", ruta)) {
-      if (requireNamespace("ragg", quietly = TRUE)) {
-        dispositivo <- ragg::agg_png
-      } else {
-        warning("Instale 'ragg' (install.packages(\"ragg\")) para que los colores ",
-                "del PNG coincidan exactamente con la paleta.", call. = FALSE)
-      }
+      dispositivo <- ragg::agg_png
+    }
+    # PDF con showtext: dibuja el texto con la Inter incluida en cualquier sistema
+    if (grepl("\\.pdf$", ruta)) {
+      showtext::showtext_auto(TRUE)
+      on.exit(showtext::showtext_auto(FALSE), add = TRUE)
+      ggsave(ruta, grafica, device = grDevices::pdf, width = ancho, height = alto,
+             bg = paleta_fondo)
+      showtext::showtext_auto(FALSE)
+      next
     }
     ggsave(ruta, grafica, device = dispositivo, width = ancho, height = alto,
            dpi = dpi, bg = paleta_fondo)

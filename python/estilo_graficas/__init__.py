@@ -6,7 +6,7 @@ Uso rápido:
     ...
     eg.guardar(fig, "mi_grafica")
 
-Los colores son los mismos de paleta.json, R/estilo_graficas.R y stata/.
+Los colores y la fuente (Inter) son los mismos de R/ y stata/.
 """
 
 from pathlib import Path
@@ -14,7 +14,12 @@ from pathlib import Path
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from cycler import cycler
+from matplotlib import font_manager
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+
+# Inter viene incluida en el paquete (licencia SIL OFL, ver fuentes/OFL.txt)
+FUENTE = "Inter"
+CARPETA_FUENTES = Path(__file__).parent / "fuentes"
 
 # ---------------------------------------------------------------------------
 # Paleta (tono 1 = más claro, tono 5 = más intenso)
@@ -85,13 +90,21 @@ def _registrar_colormaps():
             mpl.colormaps.register(cmap, name=nombre)
 
 
-def aplicar_estilo(tamano_fuente=11, fuente=None):
+def _registrar_fuentes():
+    """Registra en matplotlib los archivos de Inter incluidos en el paquete."""
+    for archivo in sorted(CARPETA_FUENTES.glob("*.ttf")):
+        font_manager.fontManager.addfont(str(archivo))
+
+
+def aplicar_estilo(tamano_fuente=11, fuente=FUENTE):
     """Aplica el estilo estándar a todas las gráficas que se creen después.
 
     tamano_fuente: tamaño base del texto.
-    fuente: nombre de una fuente instalada (opcional). Si no se da, se usa la del sistema.
+    fuente: por defecto Inter (incluida en el paquete). Puede ser el nombre de otra
+        fuente instalada, o None para usar la fuente por defecto de matplotlib.
     """
     _registrar_colormaps()
+    _registrar_fuentes()
     parametros = {
         # Colores
         "axes.prop_cycle": cycler(color=CATEGORICA),
@@ -137,6 +150,9 @@ def aplicar_estilo(tamano_fuente=11, fuente=None):
         "figure.dpi": 100,
         "savefig.dpi": 300,
         "savefig.bbox": "tight",
+        # Incrusta la fuente en PDF/PS como TrueType (texto editable)
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
     }
     if fuente:
         parametros["font.family"] = fuente

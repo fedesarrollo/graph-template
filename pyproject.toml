@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "estilo-graficas"
-version = "0.1.0"
+version = "0.2.0"
 description = "Formato estándar de gráficas para matplotlib con la paleta institucional"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -13,4 +13,7 @@ dependencies = ["matplotlib>=3.6"]
 
 [tool.setuptools]
 package-dir = { "" = "python" }
-py-modules = ["estilo_graficas"]
+packages = ["estilo_graficas"]
+
+[tool.setuptools.package-data]
+estilo_graficas = ["fuentes/*.ttf", "fuentes/OFL.txt"]

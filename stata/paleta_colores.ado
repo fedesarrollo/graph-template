@@ -1,5 +1,6 @@
-*! paleta_colores 0.1.0
-*! Crea globales con los colores de la paleta en formato RGB "R G B".
+*! paleta_colores 0.2.0
+*! Crea globales con los colores de la paleta en formato RGB "R G B"
+*! y fija Inter como fuente de las gráficas (debe estar instalada en el sistema).
 *! Uso:  paleta_colores   y luego   color("$coral")  o  color("$turquesa3")
 *! Tono 1 = más claro, tono 5 = más intenso. El nombre sin número es el tono 5.
 program define paleta_colores
@@ -64,5 +65,18 @@ program define paleta_colores
     global ejes             "168 168 168"   // #A8A8A8
     global cuadricula       "224 224 224"   // #E0E0E0
 
+    * Fuente Inter para pantalla, PNG, PDF, SVG y EPS
+    capture graph set window fontface "Inter"
+    local error_fuente = _rc
+    capture graph set svg fontface "Inter"
+    capture graph set eps fontface "Inter"
+    capture graph set ps  fontface "Inter"
+
     display as text "Colores de la paleta cargados como globales (coral, turquesa3, cat1-cat8, div1-div7, ...)."
+    if `error_fuente' {
+        display as error "No se pudo fijar la fuente Inter. Instálela desde https://rsms.me/inter/"
+    }
+    else {
+        display as text "Fuente de las gráficas: Inter."
+    }
 end

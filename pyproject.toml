@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "estilo-graficas"
+version = "0.1.0"
+description = "Formato estándar de gráficas para matplotlib con la paleta institucional"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = ["matplotlib>=3.6"]
+
+[tool.setuptools]
+package-dir = { "" = "python" }
+py-modules = ["estilo_graficas"]

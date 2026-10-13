@@ -1,0 +1,162 @@
+#include s2color
+
+sequence 1500
+label "Paleta estándar (turquesa, coral, ámbar, gris, naranja)"
+
+* Estilo estándar de gráficas para Stata.
+* Instalación: ver README (net install paleta, from(...))   y luego   set scheme paleta
+* Colores en RGB; equivalen a paleta.json.
+
+* --- Fondos
+color background        white
+color plotregion        white
+color plotregion_line   white
+color graphregion       white
+color graphregion_line  white
+color legend            white
+color legend_line       white
+
+* --- Texto
+color heading           "51 51 51"
+color subheading        "102 102 102"
+color axis_title        "51 51 51"
+color tick_label        "102 102 102"
+color text              "51 51 51"
+color body              "102 102 102"
+color small_body        "102 102 102"
+color key_label         "51 51 51"
+
+* --- Ejes y cuadrícula (solo líneas horizontales)
+color axisline          "168 168 168"
+color tick              "168 168 168"
+color grid              "224 224 224"
+color major_grid        "224 224 224"
+linewidth major_grid    thin
+linewidth grid          thin
+yesno draw_major_grid   no
+yesno draw_major_hgrid  yes
+yesno draw_major_vgrid  no
+anglestyle vertical_tick horizontal
+
+* --- Leyenda arriba
+clockpos legend_position 12
+
+* --- Series (paleta categórica)
+color p1        "91 195 206"
+color p1line    "91 195 206"
+color p1lineplot "91 195 206"
+color p1mark    "91 195 206"
+color p1markfill "91 195 206"
+color p1bar     "91 195 206"
+color p1area    "91 195 206"
+color p1box     "91 195 206"
+color p1pie     "91 195 206"
+
+color p2        "218 94 70"
+color p2line    "218 94 70"
+color p2lineplot "218 94 70"
+color p2mark    "218 94 70"
+color p2markfill "218 94 70"
+color p2bar     "218 94 70"
+color p2area    "218 94 70"
+color p2box     "218 94 70"
+color p2pie     "218 94 70"
+
+color p3        "231 165 68"
+color p3line    "231 165 68"
+color p3lineplot "231 165 68"
+color p3mark    "231 165 68"
+color p3markfill "231 165 68"
+color p3bar     "231 165 68"
+color p3area    "231 165 68"
+color p3box     "231 165 68"
+color p3pie     "231 165 68"
+
+color p4        "150 150 150"
+color p4line    "150 150 150"
+color p4lineplot "150 150 150"
+color p4mark    "150 150 150"
+color p4markfill "150 150 150"
+color p4bar     "150 150 150"
+color p4area    "150 150 150"
+color p4box     "150 150 150"
+color p4pie     "150 150 150"
+
+color p5        "237 138 73"
+color p5line    "237 138 73"
+color p5lineplot "237 138 73"
+color p5mark    "237 138 73"
+color p5markfill "237 138 73"
+color p5bar     "237 138 73"
+color p5area    "237 138 73"
+color p5box     "237 138 73"
+color p5pie     "237 138 73"
+
+color p6        "146 211 218"
+color p6line    "146 211 218"
+color p6lineplot "146 211 218"
+color p6mark    "146 211 218"
+color p6markfill "146 211 218"
+color p6bar     "146 211 218"
+color p6area    "146 211 218"
+color p6box     "146 211 218"
+color p6pie     "146 211 218"
+
+color p7        "231 152 137"
+color p7line    "231 152 137"
+color p7lineplot "231 152 137"
+color p7mark    "231 152 137"
+color p7markfill "231 152 137"
+color p7bar     "231 152 137"
+color p7area    "231 152 137"
+color p7box     "231 152 137"
+color p7pie     "231 152 137"
+
+color p8        "237 187 113"
+color p8line    "237 187 113"
+color p8lineplot "237 187 113"
+color p8mark    "237 187 113"
+color p8markfill "237 187 113"
+color p8bar     "237 187 113"
+color p8area    "237 187 113"
+color p8box     "237 187 113"
+color p8pie     "237 187 113"
+
+* Contorno de barras, áreas y tortas en blanco
+color p1barline  white
+color p1arealine white
+color p1boxline  white
+color p1pieline  white
+color p2barline  white
+color p2arealine white
+color p2boxline  white
+color p2pieline  white
+color p3barline  white
+color p3arealine white
+color p3boxline  white
+color p3pieline  white
+color p4barline  white
+color p4arealine white
+color p4boxline  white
+color p4pieline  white
+color p5barline  white
+color p5arealine white
+color p5boxline  white
+color p5pieline  white
+color p6barline  white
+color p6arealine white
+color p6boxline  white
+color p6pieline  white
+color p7barline  white
+color p7arealine white
+color p7boxline  white
+color p7pieline  white
+color p8barline  white
+color p8arealine white
+color p8boxline  white
+color p8pieline  white
+
+* --- Grosor de líneas y marcadores
+linewidth p             medthick
+symbol p                circle
+symbolsize p            medsmall

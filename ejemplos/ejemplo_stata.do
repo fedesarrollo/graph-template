@@ -29,7 +29,8 @@ labmask posicion, values(grupo)   // requiere: ssc install labutil
 gen destacar = valor == valor[_N]
 twoway (bar valor posicion if !destacar, horizontal barwidth(0.7) color("$gris4")) ///
        (bar valor posicion if  destacar, horizontal barwidth(0.7) color("$coral")), ///
-    ylabel(1/4, valuelabel noticks) ytitle("") xtitle("") legend(off) ///
+    ylabel(1/4, valuelabel noticks nogrid) xlabel(, grid) ///
+    ytitle("") xtitle("") legend(off) ///
     title("Índice por región, 2025", position(11) span) ///
     note("Fuente: datos ilustrativos.", span)
 graph export "ejemplos/salida/stata_barras.png", replace width(2400)

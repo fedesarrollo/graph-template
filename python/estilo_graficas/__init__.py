@@ -43,15 +43,20 @@ CATEGORICA = ["#5BC3CE", "#DA5E46", "#E7A544", "#969696",
 DIVERGENTE = ["#5BC3CE", "#92D3DA", "#C9E2E5", "#F2F2F2",
               "#F0BFB5", "#E79889", "#DA5E46"]
 
-TEXTO = "#333333"
-TEXTO_SECUNDARIO = "#666666"
-EJES = "#A8A8A8"
+# Texto y ejes en negro; la cuadrícula en gris claro
+TEXTO = "#000000"
+TEXTO_SECUNDARIO = "#000000"
+EJES = "#000000"
 CUADRICULA = "#E0E0E0"
 FONDO = "#FFFFFF"
 
 
 def color(familia, tono=5):
     """Devuelve un color por familia y tono (1-5). Ej.: color("coral", 3)."""
+    if familia not in FAMILIAS:
+        raise ValueError(f"Familia desconocida: {familia!r}. Opciones: {', '.join(FAMILIAS)}.")
+    if tono not in range(1, 6):
+        raise ValueError(f"El tono debe estar entre 1 y 5; se pidió {tono}.")
     return FAMILIAS[familia][tono - 1]
 
 
@@ -157,6 +162,22 @@ def aplicar_estilo(tamano_fuente=11, fuente=FUENTE):
     if fuente:
         parametros["font.family"] = fuente
     mpl.rcParams.update(parametros)
+
+
+def leyenda_arriba(ax, ncol=None):
+    """Pone la leyenda arriba del gráfico, en una fila y alineada a la izquierda.
+
+    Llamarla después de ax.set_title(): sube el título para dejar espacio a la leyenda.
+    """
+    handles, etiquetas = ax.get_legend_handles_labels()
+    leyenda = ax.legend(handles, etiquetas, loc="lower left", bbox_to_anchor=(0, 1.01),
+                        ncol=ncol or len(etiquetas), borderaxespad=0,
+                        handlelength=1.5, columnspacing=1.5)
+    titulo = ax.get_title(loc="left")
+    if titulo:
+        espacio = mpl.rcParams["axes.titlepad"] + 2.4 * mpl.rcParams["legend.fontsize"]
+        ax.set_title(titulo, loc="left", pad=espacio)
+    return leyenda
 
 
 def fuente_nota(fig, texto):

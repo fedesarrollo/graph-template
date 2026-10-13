@@ -21,9 +21,9 @@ fig, ax = plt.subplots()
 for grupo, d in datos.groupby("grupo"):
     ax.plot(d["anio"], d["valor"], label=grupo)
 ax.set_title("Índice por región, 2015-2025")
-ax.set_xlabel("")
+ax.set_xticks(range(2015, 2026, 2))
 ax.set_ylabel("Índice (2015 = 100 en Región A)")
-ax.legend(loc="upper left", ncol=4)
+eg.leyenda_arriba(ax)
 eg.fuente_nota(fig, "Fuente: datos ilustrativos.")
 eg.guardar(fig, "python_lineas", SALIDA, formatos=("png",))
 

@@ -1,4 +1,4 @@
-*! paleta_colores 0.2.0
+*! paleta_colores 0.3.0
 *! Crea globales con los colores de la paleta en formato RGB "R G B"
 *! y fija Inter como fuente de las gráficas (debe estar instalada en el sistema).
 *! Uso:  paleta_colores   y luego   color("$coral")  o  color("$turquesa3")
@@ -60,9 +60,9 @@ program define paleta_colores
     global div6       "231 152 137"   // #E79889
     global div7       "218 94 70"   // #DA5E46
 
-    global texto            "51 51 51"   // #333333
-    global texto_secundario "102 102 102"   // #666666
-    global ejes             "168 168 168"   // #A8A8A8
+    global texto            "0 0 0"   // #000000
+    global texto_secundario "0 0 0"   // #000000
+    global ejes             "0 0 0"   // #000000
     global cuadricula       "224 224 224"   // #E0E0E0
 
     * Fuente Inter para pantalla, PNG, PDF, SVG y EPS

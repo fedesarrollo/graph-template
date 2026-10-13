@@ -50,21 +50,27 @@ paleta_categorica <- c("#5BC3CE", "#DA5E46", "#E7A544", "#969696",
 paleta_divergente <- c("#5BC3CE", "#92D3DA", "#C9E2E5", "#F2F2F2",
                        "#F0BFB5", "#E79889", "#DA5E46")
 
-paleta_texto            <- "#333333"
-paleta_texto_secundario <- "#666666"
-paleta_ejes             <- "#A8A8A8"
+# Texto y ejes en negro; la cuadrícula en gris claro
+paleta_texto            <- "#000000"
+paleta_texto_secundario <- "#000000"
+paleta_ejes             <- "#000000"
 paleta_cuadricula       <- "#E0E0E0"
 paleta_fondo            <- "#FFFFFF"
 
 # Devuelve un color por familia y tono (1-5). Ej.: paleta_color("coral", 3)
 paleta_color <- function(familia, tono = 5) {
+  if (!familia %in% names(paleta_familias)) {
+    stop("Familia desconocida: '", familia, "'. Opciones: ",
+         paste(names(paleta_familias), collapse = ", "), ".")
+  }
+  if (!tono %in% 1:5) stop("El tono debe estar entre 1 y 5; se pidi\u00f3 ", tono, ".")
   paleta_familias[[familia]][tono]
 }
 
 # Primeros n colores de la paleta categórica
 paleta_cat <- function(n = length(paleta_categorica)) {
   if (n > length(paleta_categorica)) {
-    stop("La paleta categórica tiene ", length(paleta_categorica),
+    stop("La paleta categ\u00f3rica tiene ", length(paleta_categorica),
          " colores; se pidieron ", n, ".")
   }
   paleta_categorica[seq_len(n)]

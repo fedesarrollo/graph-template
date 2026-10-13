@@ -1,12 +1,12 @@
 Package: estilograficas
 Type: Package
 Title: Formato Estándar de Gráficas con la Paleta Institucional
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: person("Juan Diego", "Heredia Niño", email = "jheredia@fedesarrollo.org.co", role = c("aut", "cre"))
 Description: Tema, escalas de color, fuente Inter y funciones de exportación
     para ggplot2 con la misma paleta usada en las versiones de Python y Stata.
     Incluye la fuente Inter (SIL Open Font License, ver inst/fuentes/OFL.txt).
 License: MIT + file LICENSE
 Encoding: UTF-8
-Depends: R (>= 4.1), ggplot2 (>= 3.4)
+Depends: R (>= 4.1), ggplot2 (>= 3.5.0)
 Imports: grDevices, ragg, showtext, sysfonts, systemfonts

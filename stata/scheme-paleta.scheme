@@ -17,18 +17,18 @@ color legend            white
 color legend_line       white
 
 * --- Texto
-color heading           "51 51 51"
-color subheading        "102 102 102"
-color axis_title        "51 51 51"
-color tick_label        "102 102 102"
-color text              "51 51 51"
-color body              "102 102 102"
-color small_body        "102 102 102"
-color key_label         "51 51 51"
+color heading           black
+color subheading        black
+color axis_title        black
+color tick_label        black
+color text              black
+color body              black
+color small_body        black
+color key_label         black
 
 * --- Ejes y cuadrícula (solo líneas horizontales)
-color axisline          "168 168 168"
-color tick              "168 168 168"
+color axisline          black
+color tick              black
 color grid              "224 224 224"
 color major_grid        "224 224 224"
 linewidth major_grid    thin

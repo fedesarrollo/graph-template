@@ -63,7 +63,7 @@ A partir de estas familias se definen tres paletas de uso:
 - **Secuencial** (para valores de menor a mayor): los cinco tonos de una sola familia.
 - **Divergente** (para valores alrededor de un centro, como variaciones positivas y negativas): turquesa → gris claro → coral.
 
-Además se fijan colores neutros que no están en la paleta original pero son necesarios para que el texto se lea bien: texto `#333333`, texto secundario `#666666`, ejes `#A8A8A8` y cuadrícula `#E0E0E0`.
+Además, el texto y los ejes van en **negro** (`#000000`) y la cuadrícula en gris claro (`#E0E0E0`).
 
 ## La fuente: Inter
 
@@ -78,7 +78,7 @@ Todas las gráficas usan [Inter](https://rsms.me/inter/) (licencia SIL Open Font
 ### Reglas del formato
 
 1. Fuente Inter. Fondo blanco, sin recuadro alrededor de la gráfica.
-2. Solo líneas de cuadrícula horizontales y suaves; sin eje vertical.
+2. Texto y ejes en **negro**. Solo líneas de cuadrícula horizontales, en gris claro. En Python y R no se dibuja la línea del eje vertical (en Stata sí, porque un scheme no permite quitar solo esa).
 3. Título en negrita, alineado a la izquierda. La leyenda va arriba, sin título.
 4. La fuente de los datos va en una nota abajo a la izquierda.
 5. **Máximo cuatro o cinco colores por gráfica.** Ámbar y naranja son parecidos: si hay que distinguir muchas series, conviene agruparlas, usar paneles o resaltar solo las importantes.
@@ -117,7 +117,7 @@ fig, ax = plt.subplots()
 for grupo, d in datos.groupby("grupo"):
     ax.plot(d["anio"], d["valor"], label=grupo)
 ax.set_title("Índice por región, 2015-2025")
-ax.legend(loc="upper left", ncol=4)
+eg.leyenda_arriba(ax)   # leyenda arriba, fuera del área del gráfico (después del título)
 eg.fuente_nota(fig, "Fuente: datos ilustrativos.")
 eg.guardar(fig, "mi_grafica", carpeta="salida")   # crea salida/mi_grafica.png y .pdf
 ```

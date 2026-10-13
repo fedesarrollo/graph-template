@@ -56,9 +56,9 @@
     "#E79889",
     "#DA5E46"
   ],
-  "texto": "#333333",
-  "texto_secundario": "#666666",
-  "ejes": "#A8A8A8",
+  "texto": "#000000",
+  "texto_secundario": "#000000",
+  "ejes": "#000000",
   "cuadricula": "#E0E0E0",
   "fondo": "#FFFFFF",
   "fuente": "Inter"

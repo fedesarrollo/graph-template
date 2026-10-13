@@ -110,7 +110,7 @@ theme_paleta <- function(base_size = 11, base_family = paleta_fuente) {
       panel.grid.major.y = element_line(color = paleta_cuadricula, linewidth = 0.4),
       panel.grid.major.x = element_blank(),
       panel.grid.minor   = element_blank(),
-      legend.position  = "top",
+      legend.position  = "bottom",
       legend.justification = "left",
       legend.title     = element_blank(),
       legend.text      = element_text(size = rel(0.9)),

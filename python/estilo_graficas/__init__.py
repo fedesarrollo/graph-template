@@ -164,25 +164,29 @@ def aplicar_estilo(tamano_fuente=11, fuente=FUENTE):
     mpl.rcParams.update(parametros)
 
 
-def leyenda_arriba(ax, ncol=None):
-    """Pone la leyenda arriba del gráfico, en una fila y alineada a la izquierda.
+def leyenda_abajo(ax, ncol=None):
+    """Pone la leyenda debajo del gráfico, en una fila y alineada a la izquierda.
 
-    Llamarla después de ax.set_title(): sube el título para dejar espacio a la leyenda.
+    Llamarla después de ax.set_xlabel() (si hay título del eje x, la baja más).
     """
     handles, etiquetas = ax.get_legend_handles_labels()
-    leyenda = ax.legend(handles, etiquetas, loc="lower left", bbox_to_anchor=(0, 1.01),
-                        ncol=ncol or len(etiquetas), borderaxespad=0,
-                        handlelength=1.5, columnspacing=1.5)
-    titulo = ax.get_title(loc="left")
-    if titulo:
-        espacio = mpl.rcParams["axes.titlepad"] + 2.4 * mpl.rcParams["legend.fontsize"]
-        ax.set_title(titulo, loc="left", pad=espacio)
-    return leyenda
+    # Distancia bajo el eje, en múltiplos del tamaño de letra de la leyenda
+    separacion = 2.6 if not ax.get_xlabel() else 4.2
+    return ax.legend(handles, etiquetas, loc="upper left", bbox_to_anchor=(0, 0),
+                     ncol=ncol or len(etiquetas), borderaxespad=separacion,
+                     handlelength=1.5, columnspacing=1.5)
 
 
 def fuente_nota(fig, texto):
-    """Agrega una nota/fuente en la esquina inferior izquierda de la figura."""
-    fig.text(0.01, -0.02, texto, ha="left", va="top",
+    """Agrega una nota/fuente debajo de todo lo demás (ejes, leyenda), a la izquierda.
+
+    Llamarla al final, después de la leyenda.
+    """
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    abajo = min(ax.get_tightbbox(renderer).y0 for ax in fig.axes)
+    y = fig.transFigure.inverted().transform((0, abajo))[1]
+    fig.text(0.01, y - 0.035, texto, ha="left", va="top",
              fontsize=mpl.rcParams["font.size"] - 2, color=TEXTO_SECUNDARIO)
 
 

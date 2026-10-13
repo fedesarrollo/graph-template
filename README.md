@@ -79,7 +79,7 @@ Todas las gráficas usan [Inter](https://rsms.me/inter/) (licencia SIL Open Font
 
 1. Fuente Inter. Fondo blanco, sin recuadro alrededor de la gráfica.
 2. Texto y ejes en **negro**. Solo líneas de cuadrícula horizontales, en gris claro. En Python y R no se dibuja la línea del eje vertical (en Stata sí, porque un scheme no permite quitar solo esa).
-3. Título en negrita, alineado a la izquierda. La leyenda va arriba, sin título.
+3. Título en negrita, alineado a la izquierda. La leyenda va abajo, sin título.
 4. La fuente de los datos va en una nota abajo a la izquierda.
 5. **Máximo cuatro o cinco colores por gráfica.** Ámbar y naranja son parecidos: si hay que distinguir muchas series, conviene agruparlas, usar paneles o resaltar solo las importantes.
 6. Para resaltar un dato, ponga el resto en `gris` (tono 4) y el dato destacado en `coral` o `turquesa`.
@@ -117,8 +117,8 @@ fig, ax = plt.subplots()
 for grupo, d in datos.groupby("grupo"):
     ax.plot(d["anio"], d["valor"], label=grupo)
 ax.set_title("Índice por región, 2015-2025")
-eg.leyenda_arriba(ax)   # leyenda arriba, fuera del área del gráfico (después del título)
-eg.fuente_nota(fig, "Fuente: datos ilustrativos.")
+eg.leyenda_abajo(ax)    # leyenda abajo, fuera del área del gráfico
+eg.fuente_nota(fig, "Fuente: datos ilustrativos.")   # al final, queda debajo de la leyenda
 eg.guardar(fig, "mi_grafica", carpeta="salida")   # crea salida/mi_grafica.png y .pdf
 ```
 

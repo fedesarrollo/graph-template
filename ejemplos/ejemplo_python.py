@@ -23,7 +23,7 @@ for grupo, d in datos.groupby("grupo"):
 ax.set_title("Índice por región, 2015-2025")
 ax.set_xticks(range(2015, 2026, 2))
 ax.set_ylabel("Índice (2015 = 100 en Región A)")
-eg.leyenda_arriba(ax)
+eg.leyenda_abajo(ax)
 eg.fuente_nota(fig, "Fuente: datos ilustrativos.")
 eg.guardar(fig, "python_lineas", SALIDA, formatos=("png",))
 

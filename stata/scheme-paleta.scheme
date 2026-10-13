@@ -40,9 +40,9 @@ yesno draw_minor_hgrid  no
 yesno draw_minor_vgrid  no
 anglestyle vertical_tick horizontal
 
-* --- Leyenda arriba
-clockdir legend_position    12
-clockdir by_legend_position 12
+* --- Leyenda abajo
+clockdir legend_position    6
+clockdir by_legend_position 6
 
 * --- Series (paleta categórica)
 color p1        "91 195 206"

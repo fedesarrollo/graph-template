@@ -15,6 +15,11 @@ remotes::install_github("fedesarrollo/graph-template", subdir = "R")
 
 Esto instala también ggplot2 y la fuente Inter. **No hay que instalar nada más.**
 
+> **¿Tenía instalada la versión anterior** (cuando se llamaba `estilograficas`)? Bórrela primero:
+> ```r
+> remove.packages("estilograficas")
+> ```
+
 ## Paso 2. Activar el estilo (al inicio de cada script)
 
 ```r

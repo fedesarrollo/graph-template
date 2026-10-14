@@ -16,6 +16,11 @@ En un notebook de Jupyter, use `%pip install git+https://github.com/fedesarrollo
 
 Esto instala también matplotlib y la fuente Inter. **No hay que instalar nada más.**
 
+> **¿Tenía instalada la versión anterior** (cuando se llamaba `estilo_graficas`)? Bórrela primero:
+> ```bash
+> pip uninstall estilo-graficas
+> ```
+
 ## Paso 2. Activar el estilo (al inicio de cada script)
 
 ```python

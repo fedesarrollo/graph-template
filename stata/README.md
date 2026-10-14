@@ -19,6 +19,11 @@ Después reinicie Stata.
 net install fedesarrollo_estilo_graficas, from("https://raw.githubusercontent.com/fedesarrollo/graph-template/main/stata") replace
 ```
 
+> **¿Tenía instalada la versión anterior** (cuando se llamaba `paleta`)? Bórrela primero:
+> ```stata
+> ado uninstall paleta
+> ```
+
 ## Paso 2. Activar el estilo (al inicio de cada script)
 
 ```stata

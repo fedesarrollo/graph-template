@@ -35,9 +35,10 @@ FAMILIAS = {
 # Colores principales con nombre (el tono más intenso de cada familia)
 COLORES = {nombre: tonos[-1] for nombre, tonos in FAMILIAS.items()}
 
-# Orden por defecto para series categóricas: primero los colores más distinguibles
-CATEGORICA = ["#5BC3CE", "#DA5E46", "#E7A544", "#969696",
-              "#ED8A49", "#92D3DA", "#E79889", "#EDBB71"]
+# Series categóricas: el tono más oscuro (5) de cada familia, empezando por coral. Son solo 4
+# porque es el máximo que se distingue bien entre sí, incluso con daltonismo; con más
+# series use paneles. El gris va de último porque también se usa para dar contexto.
+CATEGORICA = ["#DA5E46", "#5BC3CE", "#E7A544", "#969696"]
 
 # Divergente: turquesa (negativo) -> gris claro (centro) -> coral (positivo)
 DIVERGENTE = ["#5BC3CE", "#92D3DA", "#C9E2E5", "#F2F2F2",
@@ -65,7 +66,10 @@ def categorica(n=None):
     if n is None:
         return list(CATEGORICA)
     if n > len(CATEGORICA):
-        raise ValueError(f"La paleta categórica tiene {len(CATEGORICA)} colores; se pidieron {n}.")
+        raise ValueError(
+            f"La paleta categórica tiene {len(CATEGORICA)} colores; se pidieron {n}. "
+            "Con más series los colores se confunden: use paneles (plt.subplots) o agrupe categorías."
+        )
     return CATEGORICA[:n]
 
 

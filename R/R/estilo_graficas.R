@@ -42,9 +42,10 @@ paleta_familias <- list(
 # Colores principales con nombre (el tono más intenso de cada familia)
 paleta_colores <- vapply(paleta_familias, function(t) t[5], character(1))
 
-# Orden por defecto para series categóricas: primero los colores más distinguibles
-paleta_categorica <- c("#5BC3CE", "#DA5E46", "#E7A544", "#969696",
-                       "#ED8A49", "#92D3DA", "#E79889", "#EDBB71")
+# Series categóricas: el tono más oscuro (5) de cada familia, empezando por coral. Son solo 4
+# porque es el máximo que se distingue bien entre sí, incluso con daltonismo; con más
+# series use paneles. El gris va de último porque también se usa para dar contexto.
+paleta_categorica <- c("#DA5E46", "#5BC3CE", "#E7A544", "#969696")
 
 # Divergente: turquesa (negativo) -> gris claro (centro) -> coral (positivo)
 paleta_divergente <- c("#5BC3CE", "#92D3DA", "#C9E2E5", "#F2F2F2",
@@ -71,7 +72,8 @@ paleta_color <- function(familia, tono = 5) {
 paleta_cat <- function(n = length(paleta_categorica)) {
   if (n > length(paleta_categorica)) {
     stop("La paleta categ\u00f3rica tiene ", length(paleta_categorica),
-         " colores; se pidieron ", n, ".")
+         " colores; se pidieron ", n, ". Con m\u00e1s series los colores se confunden: ",
+         "use paneles (facet_wrap) o agrupe categor\u00edas.", call. = FALSE)
   }
   paleta_categorica[seq_len(n)]
 }
@@ -156,8 +158,8 @@ scale_fill_paleta_div <- function(centro = 0, ...) {
 aplicar_estilo <- function(base_size = 11, base_family = paleta_fuente) {
   theme_set(theme_paleta(base_size, base_family))
   options(
-    ggplot2.discrete.colour   = paleta_categorica,
-    ggplot2.discrete.fill     = paleta_categorica,
+    ggplot2.discrete.colour   = function() scale_colour_paleta(),
+    ggplot2.discrete.fill     = function() scale_fill_paleta(),
     ggplot2.continuous.colour = function(...) scale_color_paleta_c(...),
     ggplot2.continuous.fill   = function(...) scale_fill_paleta_c(...)
   )

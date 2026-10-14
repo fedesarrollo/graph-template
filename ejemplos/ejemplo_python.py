@@ -6,7 +6,7 @@ Requiere el paquete instalado (ver README) y pandas. Ejecutar:
 
 from pathlib import Path
 
-import estilo_graficas as eg
+import fedesarrollo_estilo_graficas as eg
 import matplotlib.pyplot as plt
 import pandas as pd
 

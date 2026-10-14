@@ -1,0 +1,10 @@
+v 3
+d fedesarrollo_estilo_graficas: formato estándar de gráficas de Fedesarrollo
+d
+d Instala el comando fedesarrollo_estilo_graficas, que activa el scheme,
+d crea los colores como globales ($coral, $turquesa3, ...) y fija Inter
+d como fuente de las gráficas.
+d
+d Distribution-Date: 20261014
+f scheme-fedesarrollo_estilo_graficas.scheme
+f fedesarrollo_estilo_graficas.ado

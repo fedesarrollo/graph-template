@@ -20,7 +20,7 @@ Esto instala también matplotlib y la fuente Inter. **No hay que instalar nada m
 
 ```python
 import matplotlib.pyplot as plt
-import estilo_graficas as eg
+import fedesarrollo_estilo_graficas as eg
 
 eg.aplicar_estilo()
 ```
@@ -31,7 +31,7 @@ Copie este ejemplo, córralo y use la gráfica como punto de partida:
 
 ```python
 import matplotlib.pyplot as plt
-import estilo_graficas as eg
+import fedesarrollo_estilo_graficas as eg
 
 eg.aplicar_estilo()
 
@@ -106,7 +106,7 @@ fig, ax = plt.subplots(figsize=(6, 4))   # en pulgadas
 
 | Si pasa esto | Haga esto |
 |---|---|
-| `ModuleNotFoundError: No module named 'estilo_graficas'` | El paquete se instaló en otro Python. En un notebook, corra `%pip install git+https://github.com/fedesarrollo/graph-template` en una celda y reinicie el kernel. |
+| `ModuleNotFoundError: No module named 'fedesarrollo_estilo_graficas'` | El paquete se instaló en otro Python. En un notebook, corra `%pip install git+https://github.com/fedesarrollo/graph-template` en una celda y reinicie el kernel. |
 | Dos series salieron del mismo color | Tiene más de 4 series. Divídalas en paneles o agrupe categorías. |
 | La nota de fuente se monta sobre la leyenda | Llame `eg.fuente_nota(...)` después de `eg.leyenda_abajo(ax)`. |
 | No veo los cambios de una versión nueva | Actualice con `pip install --upgrade git+https://github.com/fedesarrollo/graph-template`. |

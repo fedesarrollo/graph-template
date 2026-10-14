@@ -5,8 +5,7 @@
 *   do ejemplos/ejemplo_stata.do
 
 clear all
-set scheme paleta
-paleta_colores
+fedesarrollo_estilo_graficas
 
 import delimited "ejemplos/datos_ejemplo.csv", clear encoding("utf-8")
 encode grupo, gen(g)

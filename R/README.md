@@ -18,7 +18,7 @@ Esto instala también ggplot2 y la fuente Inter. **No hay que instalar nada más
 ## Paso 2. Activar el estilo (al inicio de cada script)
 
 ```r
-library(estilograficas)   # también carga ggplot2
+library(fedesarrollo.estilo.graficas)   # también carga ggplot2
 aplicar_estilo()
 ```
 
@@ -27,7 +27,7 @@ aplicar_estilo()
 Copie este ejemplo, córralo y use la gráfica como punto de partida:
 
 ```r
-library(estilograficas)
+library(fedesarrollo.estilo.graficas)
 aplicar_estilo()
 
 datos <- data.frame(

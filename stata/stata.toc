@@ -1,3 +1,3 @@
 v 3
-d Formato estándar de gráficas
-p paleta Scheme y colores estándar para gráficas
+d Fedesarrollo: formato estándar de gráficas
+p fedesarrollo_estilo_graficas Scheme, colores y fuente de las gráficas de Fedesarrollo

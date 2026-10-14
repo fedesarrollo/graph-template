@@ -3,7 +3,7 @@
 # Requiere el paquete instalado (ver README). Ejecutar desde la raíz del repositorio:
 #   Rscript ejemplos/ejemplo_r.R
 
-library(estilograficas)
+library(fedesarrollo.estilo.graficas)
 aplicar_estilo()
 
 salida <- "ejemplos/salida"

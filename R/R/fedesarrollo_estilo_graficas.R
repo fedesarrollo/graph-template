@@ -1,7 +1,7 @@
 # Estilo estándar de gráficas para ggplot2.
 #
 # Uso rápido:
-#   library(estilograficas)   # también carga ggplot2
+#   library(fedesarrollo.estilo.graficas)   # también carga ggplot2
 #   aplicar_estilo()
 #   ggplot(datos, aes(x, y, color = grupo)) + geom_line()
 #

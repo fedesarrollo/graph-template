@@ -3,8 +3,8 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "estilo-graficas"
-version = "0.4.0"
+name = "fedesarrollo-estilo-graficas"
+version = "0.5.0"
 description = "Formato estándar de gráficas para matplotlib con la paleta institucional"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -13,7 +13,7 @@ dependencies = ["matplotlib>=3.6"]
 
 [tool.setuptools]
 package-dir = { "" = "python" }
-packages = ["estilo_graficas"]
+packages = ["fedesarrollo_estilo_graficas"]
 
 [tool.setuptools.package-data]
-estilo_graficas = ["fuentes/*.ttf", "fuentes/OFL.txt"]
+fedesarrollo_estilo_graficas = ["fuentes/*.ttf", "fuentes/OFL.txt"]

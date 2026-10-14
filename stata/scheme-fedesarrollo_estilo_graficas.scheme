@@ -1,10 +1,10 @@
 #include s2color
 
 sequence 1500
-label "Paleta estándar (turquesa, coral, ámbar, gris, naranja)"
+label "Fedesarrollo: estilo de gráficas"
 
 * Estilo estándar de gráficas para Stata.
-* Instalación: ver README (net install paleta, from(...))   y luego   set scheme paleta
+* Se activa con el comando fedesarrollo_estilo_graficas (ver stata/README.md)
 * Colores en RGB; equivalen a paleta.json.
 
 * --- Fondos

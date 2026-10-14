@@ -16,25 +16,23 @@ Después reinicie Stata.
 **b) El paquete.** En Stata:
 
 ```stata
-net install paleta, from("https://raw.githubusercontent.com/fedesarrollo/graph-template/main/stata") replace
+net install fedesarrollo_estilo_graficas, from("https://raw.githubusercontent.com/fedesarrollo/graph-template/main/stata") replace
 ```
 
 ## Paso 2. Activar el estilo (al inicio de cada script)
 
 ```stata
-set scheme paleta
-paleta_colores
+fedesarrollo_estilo_graficas
 ```
 
-Para no tener que escribir `set scheme` cada vez, corra una sola vez `set scheme paleta, permanently`.
+Esta línea activa todo: el scheme (fondo, ejes, leyenda y colores de las series), los colores por nombre y la fuente Inter.
 
 ## Paso 3. Hacer la gráfica
 
 Copie este ejemplo, córralo y use la gráfica como punto de partida:
 
 ```stata
-set scheme paleta
-paleta_colores
+fedesarrollo_estilo_graficas
 
 sysuse auto, clear
 twoway (scatter price mpg if foreign == 0) ///
@@ -50,7 +48,7 @@ Los colores salen solos, en orden: coral, turquesa, ámbar, gris. `position(11) 
 ## Antes de entregar una gráfica
 
 - [ ] Inter instalada en el computador (una sola vez).
-- [ ] `set scheme paleta` y `paleta_colores` al inicio del do-file.
+- [ ] `fedesarrollo_estilo_graficas` al inicio del do-file.
 - [ ] Máximo **4 series** por gráfica. Desde la quinta, Stata usa colores que no son de la paleta.
 - [ ] Título con `position(11) span`, fuente de datos con `note("Fuente: ...", span)`.
 - [ ] Exportar con `graph export "nombre.png", replace width(2400)`.
@@ -59,7 +57,7 @@ Los colores salen solos, en orden: coral, turquesa, ámbar, gris. `position(11) 
 
 ### Usar un color por nombre
 
-`paleta_colores` crea los colores como globales. Se usan dentro de `color()`, entre comillas:
+`fedesarrollo_estilo_graficas` crea los colores como globales. Se usan dentro de `color()`, entre comillas:
 
 ```stata
 twoway (line valor anio if grupo == "Región A", lcolor("$coral")) ///
@@ -98,7 +96,7 @@ Divida en paneles con `by(variable)`.
 
 | Si pasa esto | Haga esto |
 |---|---|
-| `command paleta_colores is unrecognized` | Falta instalar el paquete: corra el `net install` del paso 1. |
+| `command fedesarrollo_estilo_graficas is unrecognized` | Falta instalar el paquete: corra el `net install` del paso 1. |
 | La gráfica no sale en Inter | Inter no está instalada en el computador, o no reinició Stata después de instalarla. |
 | Desde la quinta serie aparecen colores raros | La paleta tiene 4 colores. Use `by()` o agrupe categorías. |
 | No veo los cambios de una versión nueva | Vuelva a correr el `net install ... replace` del paso 1. |
@@ -161,7 +159,7 @@ Las combinaciones se revisaron midiendo cuánto se distinguen los colores entre 
 
 ### Fuente: Inter
 
-Todas las gráficas usan [Inter](https://rsms.me/inter/) (licencia SIL Open Font License). Hay que **instalarla en el computador** (ver el paso 1). `paleta_colores` la fija como fuente de las gráficas y Stata recuerda ese ajuste.
+Todas las gráficas usan [Inter](https://rsms.me/inter/) (licencia SIL Open Font License). Hay que **instalarla en el computador** (ver el paso 1). `fedesarrollo_estilo_graficas` la fija como fuente de las gráficas y Stata recuerda ese ajuste.
 
 ### Ejemplo completo del repositorio
 

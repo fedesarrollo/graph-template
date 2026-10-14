@@ -1,7 +1,7 @@
-Package: estilograficas
+Package: fedesarrollo.estilo.graficas
 Type: Package
-Title: Formato Estándar de Gráficas con la Paleta Institucional
-Version: 0.4.0
+Title: Formato Estándar de Gráficas de Fedesarrollo
+Version: 0.5.0
 Authors@R: person("Juan Diego", "Heredia Niño", email = "jheredia@fedesarrollo.org.co", role = c("aut", "cre"))
 Description: Tema, escalas de color, fuente Inter y funciones de exportación
     para ggplot2 con la misma paleta usada en las versiones de Python y Stata.

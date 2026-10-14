@@ -1,7 +1,7 @@
 """Estilo estándar de gráficas para matplotlib (y seaborn/pandas, que usan matplotlib).
 
 Uso rápido:
-    import estilo_graficas as eg
+    import fedesarrollo_estilo_graficas as eg
     eg.aplicar_estilo()
     ...
     eg.guardar(fig, "mi_grafica")
